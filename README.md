@@ -153,7 +153,7 @@ PS C:\Users\User\Desktop\LL_03_php\part_2> php -S localhost:8000 -t public
 
 ## Краткая документация к проекту
 
-### Управление транзакциями (`functions.php`)
+### Part_1 : Управление транзакциями (`functions.php`)
 
 | Функция                        | Параметры                                   | Возвращаемое значение | Описание                           |
 | ------------------------------ | ------------------------------------------- | --------------------- | ---------------------------------- | -------------------------------- |
@@ -164,14 +164,78 @@ PS C:\Users\User\Desktop\LL_03_php\part_2> php -S localhost:8000 -t public
 | `addTransaction`               | `int $id, string $date, float $amount, ...` | `void`                | Добавление с валидацией данных     |
 | `deleteTransactionById`        | `int $id`                                   | `bool`                | Удаление с переиндексацией массива |
 
-### Галерея изображений (`gallery.php`)
+### Part_2: Галерея изображений (`functions.php`)
 
 ```php
-function getImages(string $dir): array {
-    // Возвращает массив .jpg файлов из указанной директории
-    // Игнорирует системные файлы (., ..)
-    // Пример: ['image/cat1.jpg', 'image/cat2.jpg']
+
+<?php
+/**
+ * Функции для работы с галереей изображений.
+ */
+
+/**
+ * Возвращает массив путей к изображениям .jpg в указанной директории.
+ *
+ * @param string $dir Путь к директории с изображениями относительно корня проекта.
+ * @return array Массив путей к изображениям или пустой массив, если директория не существует или нет изображений.
+ */
+function getImages($dir)
+{
+    // Проверяем, существует ли директория
+    if (!is_dir($dir)) {
+        return [];
+    }
+
+    // Сканируем содержимое директории
+    $files = scandir($dir);
+    if ($files === false) {
+        return [];
+    }
+
+    $images = [];
+    // Перебираем все файлы в директории
+    foreach ($files as $file) {
+        // Пропускаем текущий (.) и родительский (..) каталоги, проверяем расширение .jpg
+        if ($file != "." && $file != ".." && strtolower(pathinfo($file, PATHINFO_EXTENSION)) == 'jpg') {
+            $images[] = $dir . '/' . $file;
+        }
+    }
+
+    return $images;
 }
+```
+
+```php
+
+//index.php
+
+<?php
+require_once 'includes/functions.php';
+
+// Путь к директории с изображениями относительно корня public
+$imageDir = 'image';
+$images = getImages($imageDir);
+?>
+
+<?php include 'header.php'; ?>
+
+
+<main>
+    <h1>Галерея изображений</h1>
+    <?php if (empty($images)): ?>
+        <p>Изображения не найдены. Пожалуйста, проверьте директорию <code>image</code>.</p>
+    <?php else: ?>
+        <div class="gallery">
+            <?php foreach ($images as $image): ?>
+                <img src="<?php echo $image; ?>" alt="Изображение">
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</main>
+
+<?php include 'footer.php'; ?>
+
+
 ```
 
 ---
