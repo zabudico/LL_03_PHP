@@ -155,14 +155,14 @@ PS C:\Users\User\Desktop\LL_03_php\part_2> php -S localhost:8000 -t public
 
 ### Part_1 : Управление транзакциями (`functions.php`)
 
-| Функция                        | Параметры                                   | Возвращаемое значение | Описание                           |
-| ------------------------------ | ------------------------------------------- | --------------------- | ---------------------------------- | -------------------------------- |
-| `calculateTotalAmount`         | `array $transactions`                       | `float`               | Сумма всех транзакций              |
-| `findTransactionByDescription` | `string $descriptionPart`                   | `array`               | Поиск по части описания            |
-| `findTransactionById`          | `int $id`                                   | `array                | null`                              | Поиск по ID через `array_filter` |
-| `daysSinceTransaction`         | `string $date`                              | `int`                 | Расчет дней с даты транзакции      |
-| `addTransaction`               | `int $id, string $date, float $amount, ...` | `void`                | Добавление с валидацией данных     |
-| `deleteTransactionById`        | `int $id`                                   | `bool`                | Удаление с переиндексацией массива |
+| Функция                        | Параметры                                   | Возвращаемое значение | Описание                              |
+|--------------------------------|---------------------------------------------|------------------------|---------------------------------------|
+| `calculateTotalAmount`         | `array $transactions`                       | `float`                | Сумма всех транзакций                 |
+| `findTransactionByDescription` | `string $descriptionPart`                   | `array`                | Поиск по части описания               |
+| `findTransactionById`          | `int $id`                                   | `array|null`           | Поиск по ID через `array_filter`      |
+| `daysSinceTransaction`         | `string $date`                              | `int`                  | Расчет дней с даты транзакции         |
+| `addTransaction`               | `int $id, string $date, float $amount, ...` | `void`                 | Добавление с валидацией данных        |
+| `deleteTransactionById`        | `int $id`                                   | `bool`                 | Удаление с переиндексацией массива    |
 
 ### Part_2: Галерея изображений (`functions.php`)
 
