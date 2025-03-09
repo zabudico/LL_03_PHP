@@ -17,8 +17,8 @@
 ### Шаги:
 1. Клонировать репозиторий:
    ```bash
-   git clone https://github.com/your-repo/transactions-gallery.git
-   cd transactions-gallery
+   git clone https://github.com/zabudico/LL_03_PHP.git
+   cd LL_03_PHP
    ```
 2. Создать директорию `image` и добавить 20-30 изображений в формате `.jpg`
 3. Запустить веб-сервер:
